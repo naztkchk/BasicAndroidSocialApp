@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">BasicAndroidSocialApp</string>
+
+    //Button
+    <string name="signIn_btn">Sign In</string>
+    <string name="signUp_btn">Sign Up</string>
+    <string name="send_recover_code_btn">Send recovery code</string>
+
+
+    //TextView
+    <string name="create_account_tv">No account yet? Create one</string>
+    <string name="already_have_account_tv">Have an account? Sign In here!</string>
+    <string name="forgot_password_tv">Forgot password?</string>
+
+    <string name="back_to_sign_in_tv">Back to Sign In</string>
+
+    //Hint
+    <string name="enter_email_hint">Enter email</string>
+    <string name="enter_login_hint">Enter login</string>
+    <string name="enter_password_hint">Enter password</string>
+    <string name="confirm_password_hint">Confirm password</string>
+
+
+</resources>

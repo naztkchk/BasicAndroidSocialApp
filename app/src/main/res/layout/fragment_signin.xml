@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="50dp"
+    android:paddingRight="50dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            android:background="@mipmap/ic_launcher_round"
+            />
+
+        <EditText
+            android:id="@+id/enter_email_te_signin"
+            android:hint="@string/enter_email_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:inputType="textEmailAddress"
+            android:nextFocusDown="@+id/enter_password_te_signin"
+            android:nextFocusForward="@+id/enter_password_te_signin"
+            />
+
+        <EditText
+            android:id="@+id/enter_password_te_signin"
+            android:hint="@string/enter_password_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:inputType="textPassword"
+            android:nextFocusDown="@+id/signIn_btn"
+            android:nextFocusForward="@+id/signIn_btn"
+            />
+
+        <Button
+            android:id="@+id/signIn_btn"
+            android:text="@string/signIn_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            />
+
+        <TextView
+            android:id="@+id/forgot_password_tv"
+            android:text="@string/forgot_password_tv"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:id="@+id/signup_tv"
+            android:text="@string/create_account_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_marginTop="150dp"
+            android:textColor="#4444ff"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>
