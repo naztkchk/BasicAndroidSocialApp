@@ -1,5 +1,6 @@
 package com.pllug.course.tkachuk.basicandroidsocialapp;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -54,6 +55,8 @@ public class AuthorizationActivity extends AppCompatActivity {
 
     public void signIn(String email, String password) {
         Toast.makeText(this, "You are logged in!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(AuthorizationActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 
     public void signUp(String email, String login, String password) {
