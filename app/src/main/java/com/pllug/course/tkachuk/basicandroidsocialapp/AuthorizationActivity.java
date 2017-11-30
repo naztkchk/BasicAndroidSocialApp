@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.pllug.course.tkachuk.basicandroidsocialapp.fragments.AboutFragment;
 import com.pllug.course.tkachuk.basicandroidsocialapp.fragments.ForgotPasswordFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.fragments.ProfileFragment;
 import com.pllug.course.tkachuk.basicandroidsocialapp.fragments.SignInFragment;
 import com.pllug.course.tkachuk.basicandroidsocialapp.fragments.SignUpFragment;
 
@@ -55,8 +56,7 @@ public class AuthorizationActivity extends AppCompatActivity {
 
     public void signIn(String email, String password) {
         Toast.makeText(this, "You are logged in!", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(AuthorizationActivity.this, MainActivity.class);
-        startActivity(intent);
+        replaceFragment(new ProfileFragment());
     }
 
     public void signUp(String email, String login, String password) {
