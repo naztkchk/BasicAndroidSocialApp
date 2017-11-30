@@ -5,6 +5,11 @@
     android:paddingLeft="50dp"
     android:paddingRight="50dp">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -77,7 +82,7 @@
             android:layout_margin="10dp"
             android:textAlignment="center"
             android:textColor="#4444ff" />
-
     </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
