@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#5DC8CD"
+    >
+
+    <!--Header-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <!--Photo of profile-->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/profile_photo_iv"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/profile_photo_edit_iv"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:background="@mipmap/ic_add_photo">
+            </ImageView>
+        </RelativeLayout>
+
+        <!--Done-->
+        <ImageVie
+            android:id="@+id/profile_edit_done_iv"
+            android:layout_marginTop="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@mipmap/ic_edit_done"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <!--Profile name-->
+        <EditText
+            android:id="@+id/profile_edit_name_et"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:paddingLeft="10dp"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <!--Info of profile-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:orientation="vertical">
+
+            <!--Main buttons-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingTop="15dp">
+
+                <Button
+                    android:text="Send message"
+                    android:enabled="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    />
+
+                <Button
+                    android:text="Follow"
+                    android:enabled="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+            <!--Status of profile-->
+            <EditText
+                android:id="@+id/profile_status_edit_et"
+                android:textSize="17sp"
+                android:paddingTop="15dp"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:layout_width="300dp"
+                android:layout_height="50dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white" />
+
+            <!--Phone-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingTop="15dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="4">
+
+                    <EditText
+                        android:id="@+id/profile_mobile_edit_et"
+                        android:layout_width="300dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="4"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:text="mobile"
+                        android:textSize="15sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@mipmap/ic_phone" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white" />
+
+            <!--Email-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingTop="15dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="4">
+
+                    <EditText
+                        android:id="@+id/profile_email_edit_et"
+                        android:layout_width="300dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="4"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:text="email"
+                        android:textSize="15sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@mipmap/ic_email" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white" />
+
+
+            <!--About profile-->
+            <EditText
+                android:id="@+id/profile_about_edit_et"
+                android:textSize="17sp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingTop="20dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
