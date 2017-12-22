@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">BasicAndroidSocialApp</string>
+    <string name="app_description">Course project by Nazar Tkachuk (PLLUG 2017-2)</string>
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 
     //Button
     <string name="signIn_btn">Sign In</string>
@@ -19,6 +23,12 @@
     <string name="enter_login_hint">Enter login</string>
     <string name="enter_password_hint">Enter password</string>
     <string name="confirm_password_hint">Confirm password</string>
+    <string name="title_activity_drawer">DrawerActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 
 
 </resources>
