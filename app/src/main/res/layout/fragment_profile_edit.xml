@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#5DC8CD"
+    android:background="@color/colorPrimaryDark"
     >
 
     <!--Header-->
@@ -33,25 +33,26 @@
         </RelativeLayout>
 
         <!--Done-->
-        <ImageVie
+        <ImageView
             android:id="@+id/profile_edit_done_iv"
-            android:layout_marginTop="10dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@mipmap/ic_edit_done"
-            android:layout_alignParentTop="true"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@mipmap/ic_edit_done" />
 
         <!--Profile name-->
         <EditText
             android:id="@+id/profile_edit_name_et"
-            android:textColor="@color/white"
-            android:textSize="30sp"
             android:layout_width="300dp"
             android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
             android:paddingLeft="10dp"
-            android:layout_alignParentBottom="true" />
+            android:textColor="@color/white"
+            android:textSize="30sp" />
     </RelativeLayout>
 
     <!--Info of profile-->
