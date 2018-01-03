@@ -1,17 +1,17 @@
-package com.pllug.course.tkachuk.basicandroidsocialapp;
+package com.pllug.course.tkachuk.basicandroidsocialapp.activity;
 
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.pllug.course.tkachuk.basicandroidsocialapp.fragments.AboutFragment;
-import com.pllug.course.tkachuk.basicandroidsocialapp.fragments.ForgotPasswordFragment;
-import com.pllug.course.tkachuk.basicandroidsocialapp.fragments.ProfileFragment;
-import com.pllug.course.tkachuk.basicandroidsocialapp.fragments.SignInFragment;
-import com.pllug.course.tkachuk.basicandroidsocialapp.fragments.SignUpFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.R;
+import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.AboutFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.ForgotPasswordFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.ProfileFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.SignInFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.SignUpFragment;
 
 public class AuthorizationActivity extends AppCompatActivity {
 

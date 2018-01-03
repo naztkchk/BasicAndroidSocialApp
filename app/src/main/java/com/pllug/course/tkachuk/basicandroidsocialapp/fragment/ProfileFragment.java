@@ -1,4 +1,4 @@
-package com.pllug.course.tkachuk.basicandroidsocialapp.fragments;
+package com.pllug.course.tkachuk.basicandroidsocialapp.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

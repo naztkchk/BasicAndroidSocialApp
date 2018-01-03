@@ -1,4 +1,4 @@
-package com.pllug.course.tkachuk.basicandroidsocialapp.fragments;
+package com.pllug.course.tkachuk.basicandroidsocialapp.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.pllug.course.tkachuk.basicandroidsocialapp.AuthorizationActivity;
+import com.pllug.course.tkachuk.basicandroidsocialapp.activity.AuthorizationActivity;
 
 import com.pllug.course.tkachuk.basicandroidsocialapp.R;
 

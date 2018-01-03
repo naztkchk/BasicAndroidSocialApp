@@ -1,4 +1,4 @@
-package com.pllug.course.tkachuk.basicandroidsocialapp;
+package com.pllug.course.tkachuk.basicandroidsocialapp.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,7 +10,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
+
+import com.pllug.course.tkachuk.basicandroidsocialapp.R;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener
 {

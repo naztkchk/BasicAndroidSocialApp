@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.pllug.course.tkachuk.basicandroidsocialapp.AuthorizationActivity"
+    tools:context=".activity.AuthorizationActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 

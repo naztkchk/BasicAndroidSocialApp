@@ -1,4 +1,4 @@
-package com.pllug.course.tkachuk.basicandroidsocialapp.fragments;
+package com.pllug.course.tkachuk.basicandroidsocialapp.fragment;
 
 import android.support.v4.app.Fragment;
 
