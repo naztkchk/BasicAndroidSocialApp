@@ -52,7 +52,7 @@ public class AlbumActivity extends AppCompatActivity implements View.OnClickList
         recyclerView.setLayoutManager(layoutManager);
 
         downloadAll_fab = (FloatingActionButton) findViewById(R.id.album_update_fab);
-        search_fab = (FloatingActionButton) findViewById(R.id.search_album_fab);;
+        search_fab = (FloatingActionButton) findViewById(R.id.album_search_fab);;
 
         if(InternetConnection.checkConnection(getApplicationContext())) {
             downloadAll_fab.setOnClickListener(this);
@@ -70,7 +70,7 @@ public class AlbumActivity extends AppCompatActivity implements View.OnClickList
                 adapter = new AlbumAdapter(getApplicationContext(), albumRepository.getList());
                 recyclerView.setAdapter(adapter);
             }
-            case R.id.search_album_fab: {
+            case R.id.album_search_fab: {
                 final EditText titleEdit = new EditText(AlbumActivity.this);
                 AlertDialog dialog = new AlertDialog.Builder(AlbumActivity.this)
                         .setTitle("Search album")
