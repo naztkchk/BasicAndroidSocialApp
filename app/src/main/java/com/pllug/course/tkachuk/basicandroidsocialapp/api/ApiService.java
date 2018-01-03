@@ -9,4 +9,7 @@ public interface ApiService {
 
     @GET("/albums")
     Call<JsonArray> getAlbums();
+
+    @GET("/photos")
+    Call<JsonArray> getPhotos();
 }
