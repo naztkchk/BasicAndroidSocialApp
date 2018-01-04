@@ -1,5 +1,6 @@
 package com.pllug.course.tkachuk.basicandroidsocialapp.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.pllug.course.tkachuk.basicandroidsocialapp.R;
 
@@ -45,20 +47,35 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-//        switch (item.getItemId()){
-//            case R.id.nav_profile:
-//
-//                break;
-//            case R.id.nav_posts:
-//
-//                break;
-//            case R.id.nav_albums:
-//
-//                break;
-//            case R.id.nav_settings:
-//
-//                break;
-//        }
+        Intent intent;
+
+        switch (item.getItemId()){
+            case R.id.nav_profile:
+                Toast.makeText(this, "profile choose", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.nav_posts:
+                Toast.makeText(this, "posts choose", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.nav_images:
+                intent = new Intent(this, ImageActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.nav_albums:
+                intent = new Intent(this, AlbumActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.nav_settings:
+                Toast.makeText(this, "settings choose", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.nav_about:
+                Toast.makeText(this, "about choose", Toast.LENGTH_SHORT).show();
+                break;
+        }
 
         return false;
     }

@@ -9,10 +9,17 @@
             android:id="@+id/nav_posts"
             android:icon="@mipmap/ic_posts"
             android:title="Posts" />
+
+        <item
+            android:id="@+id/nav_images"
+            android:icon="@mipmap/ic_images"
+            android:title="Images" />
+
         <item
             android:id="@+id/nav_albums"
             android:icon="@mipmap/ic_albums"
             android:title="Albums" />
+
         <item
             android:id="@+id/nav_settings"
             android:icon="@mipmap/ic_settings"
