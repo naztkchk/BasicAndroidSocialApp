@@ -12,4 +12,7 @@ public interface ApiService {
 
     @GET("/photos")
     Call<JsonArray> getPhotos();
+
+    @GET("/users")
+    Call<JsonArray> getProfiles();
 }
