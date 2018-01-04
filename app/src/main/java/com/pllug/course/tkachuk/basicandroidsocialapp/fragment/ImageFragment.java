@@ -19,7 +19,6 @@ import android.widget.Toast;
 import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
 import com.pllug.course.tkachuk.basicandroidsocialapp.R;
-import com.pllug.course.tkachuk.basicandroidsocialapp.activity.ImageActivity;
 import com.pllug.course.tkachuk.basicandroidsocialapp.adapter.ImageAdapter;
 import com.pllug.course.tkachuk.basicandroidsocialapp.api.ApiService;
 import com.pllug.course.tkachuk.basicandroidsocialapp.api.RetroClient;
