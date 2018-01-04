@@ -20,7 +20,11 @@
             android:layout_height="wrap_content">
         </include>
 
-        <!--Content-->
+        <FrameLayout
+            android:id="@+id/fragment_main_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </FrameLayout>
 
     </LinearLayout>
 

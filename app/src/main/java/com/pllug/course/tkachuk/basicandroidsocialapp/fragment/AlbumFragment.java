@@ -1,15 +1,18 @@
-package com.pllug.course.tkachuk.basicandroidsocialapp.activity;
+package com.pllug.course.tkachuk.basicandroidsocialapp.fragment;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -31,7 +34,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AlbumActivity extends AppCompatActivity implements View.OnClickListener{
+public class AlbumFragment extends Fragment implements View.OnClickListener{
+
+    private View root;
+    private Context mContext;
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -41,25 +47,28 @@ public class AlbumActivity extends AppCompatActivity implements View.OnClickList
     FloatingActionButton downloadAll_fab;
     FloatingActionButton search_fab;
 
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_albums);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        root = inflater.inflate(R.layout.fragment_albums, container, false);
+        mContext = root.getContext();
 
-        recyclerView = (RecyclerView) findViewById(R.id.albums_rv);
+        recyclerView = (RecyclerView) root.findViewById(R.id.albums_rv);
         recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(layoutManager);
 
-        downloadAll_fab = (FloatingActionButton) findViewById(R.id.album_update_fab);
-        search_fab = (FloatingActionButton) findViewById(R.id.album_search_fab);;
+        downloadAll_fab = (FloatingActionButton) root.findViewById(R.id.album_update_fab);
+        search_fab = (FloatingActionButton) root.findViewById(R.id.album_search_fab);;
 
-        if(InternetConnection.checkConnection(getApplicationContext())) {
+        if(InternetConnection.checkConnection(mContext)) {
             downloadAll_fab.setOnClickListener(this);
             search_fab.setOnClickListener(this);
             loadData();
         }
-        else Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(mContext, "No internet connection", Toast.LENGTH_SHORT).show();
+
+        return root;
     }
 
     public void onClick (View view){
@@ -68,13 +77,13 @@ public class AlbumActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.album_update_fab: {
                 //Binding that List to Adapter
-                adapter = new AlbumAdapter(getApplicationContext(), albumRepository.getList());
+                adapter = new AlbumAdapter(getContext(), albumRepository.getList());
                 recyclerView.setAdapter(adapter);
                 break;
             }
             case R.id.album_search_fab: {
-                final EditText titleEdit = new EditText(AlbumActivity.this);
-                AlertDialog dialog = new AlertDialog.Builder(AlbumActivity.this)
+                final EditText titleEdit = new EditText(mContext);
+                AlertDialog dialog = new AlertDialog.Builder(mContext)
                         .setTitle("Search album")
                         .setMessage("Enter a title of album")
                         .setView(titleEdit)
@@ -84,9 +93,9 @@ public class AlbumActivity extends AppCompatActivity implements View.OnClickList
                                 String title = String.valueOf(titleEdit.getText());
 
                                 if (albumRepository.getByName(title) == null) {
-                                    Toast.makeText(getApplicationContext(), "Not Found", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(mContext, "Not Found", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    adapter = new AlbumAdapter(getApplicationContext(),
+                                    adapter = new AlbumAdapter(mContext,
                                             albumRepository.getByName(title));
                                     recyclerView.setAdapter(adapter);
                                 }
@@ -132,4 +141,3 @@ public class AlbumActivity extends AppCompatActivity implements View.OnClickList
             }});
     }
 }
-
