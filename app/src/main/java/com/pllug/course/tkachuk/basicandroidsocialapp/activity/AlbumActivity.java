@@ -65,10 +65,12 @@ public class AlbumActivity extends AppCompatActivity implements View.OnClickList
     public void onClick (View view){
 
         switch (view.getId()) {
+
             case R.id.album_update_fab: {
                 //Binding that List to Adapter
                 adapter = new AlbumAdapter(getApplicationContext(), albumRepository.getList());
                 recyclerView.setAdapter(adapter);
+                break;
             }
             case R.id.album_search_fab: {
                 final EditText titleEdit = new EditText(AlbumActivity.this);
@@ -93,6 +95,7 @@ public class AlbumActivity extends AppCompatActivity implements View.OnClickList
                         .setNegativeButton("Cancel", null)
                         .create();
                 dialog.show();
+                break;
             }
         }
     }
