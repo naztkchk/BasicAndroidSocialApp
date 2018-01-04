@@ -1,20 +1,29 @@
 package com.pllug.course.tkachuk.basicandroidsocialapp.model;
 
-public class Photo {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+public class Image {
+
+    @SerializedName("albumId")
+    @Expose
     private int albumId;
-    private int id;
-    private String title;
-    private String url;
-    private String thumbnailUrl;
 
-    public Photo(int albumId, int id, String title, String url, String thumbnailUrl) {
-        this.albumId = albumId;
-        this.id = id;
-        this.title = title;
-        this.url = url;
-        this.thumbnailUrl = thumbnailUrl;
-    }
+    @SerializedName("id")
+    @Expose
+    private int id;
+
+    @SerializedName("title")
+    @Expose
+    private String title;
+
+    @SerializedName("url")
+    @Expose
+    private String url;
+
+    @SerializedName("thumbnailUrl")
+    @Expose
+    private String thumbnailUrl;
 
     public int getAlbumId() {
         return albumId;
