@@ -19,7 +19,7 @@ import com.pllug.course.tkachuk.basicandroidsocialapp.R;
 import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.AboutFragment;
 import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.AlbumFragment;
 import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.ImageFragment;
-import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.ProfileFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.ProfilesFragment;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener
 {
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
         switch (item.getItemId()){
             case R.id.nav_profile:
-                replaceFragment(new ProfileFragment());
+                replaceFragment(new ProfilesFragment());
                 break;
 
             case R.id.nav_posts:

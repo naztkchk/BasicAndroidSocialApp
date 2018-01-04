@@ -23,7 +23,7 @@ public class ProfileRepository implements IRepository{
     }
 
     @Override
-    public List getList() {
+    public ArrayList<Profile> getList() {
         return profileList;
     }
 

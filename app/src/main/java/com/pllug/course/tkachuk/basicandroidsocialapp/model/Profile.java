@@ -102,7 +102,7 @@ public class Profile {
     }
 }
 
-class Address{
+ class Address{
 
     @SerializedName("street")
     @Expose
