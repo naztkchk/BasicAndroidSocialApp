@@ -14,4 +14,20 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"/>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/post_update_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@mipmap/ic_download"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/post_search_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="16dp"
+        android:src="@mipmap/ic_search"/>
+
 </android.support.design.widget.CoordinatorLayout>

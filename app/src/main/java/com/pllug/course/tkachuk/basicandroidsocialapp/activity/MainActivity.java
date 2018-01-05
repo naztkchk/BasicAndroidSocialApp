@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.pllug.course.tkachuk.basicandroidsocialapp.R;
 import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.AboutFragment;
-import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.AlbumFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.PostFragment;
 import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.ImageFragment;
 import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.ProfilesFragment;
 
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 break;
 
             case R.id.nav_posts:
-                Toast.makeText(this, "posts choose", Toast.LENGTH_SHORT).show();
+                replaceFragment(new PostFragment());
                 break;
 
             case R.id.nav_images:
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 break;
 
             case R.id.nav_albums:
-                replaceFragment(new AlbumFragment());
+                replaceFragment(new PostFragment());
                 break;
 
             case R.id.nav_settings:

@@ -15,4 +15,7 @@ public interface ApiService {
 
     @GET("/users")
     Call<JsonArray> getProfiles();
+
+    @GET("/posts")
+    Call<JsonArray> getPosts();
 }

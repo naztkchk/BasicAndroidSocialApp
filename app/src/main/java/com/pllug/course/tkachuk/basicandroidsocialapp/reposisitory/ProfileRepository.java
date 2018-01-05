@@ -13,6 +13,8 @@ public class ProfileRepository implements IRepository{
         this.profileList = list;
     }
 
+    public ProfileRepository(){}
+
     public Profile getById(final int id){
         for(Profile a: profileList){
             if(a.getId() == id){
