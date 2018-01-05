@@ -1,10 +1,8 @@
 package com.pllug.course.tkachuk.basicandroidsocialapp.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,11 +34,9 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        Log.i("onCreateView", "START");
-
         name_tv = root.findViewById(R.id.profile_name);
-        username_tv = root.findViewById(R.id.profile_username);
         id_tv = root.findViewById(R.id.profile_id);
+        username_tv = root.findViewById(R.id.profile_username);
         city_tv = root.findViewById(R.id.profile_city);
         email_tv = root.findViewById(R.id.profile_email);
         phone_tv = root.findViewById(R.id.profile_mobile_tv);
@@ -48,14 +44,12 @@ public class ProfileFragment extends Fragment {
 
 
         setData(profile);
-        Log.i("onCreateView", "STOP");
         return root;
     }
 
 
     public void setData(Profile profile){
 
-        Log.i("name = ", profile.getName());
 
         name_tv.setText(profile.getName());
         username_tv.setText(profile.getUsername());
@@ -73,7 +67,4 @@ public class ProfileFragment extends Fragment {
     public void setProfile(Profile profile){
         this.profile = profile;
     }
-
-
-    //Todo передавати сюди дані юзера і показувати фрагмент з його даними
 }

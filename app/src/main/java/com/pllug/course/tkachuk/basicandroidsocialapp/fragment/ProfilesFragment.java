@@ -1,6 +1,5 @@
 package com.pllug.course.tkachuk.basicandroidsocialapp.fragment;
 
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -139,14 +138,12 @@ public class ProfilesFragment extends Fragment implements View.OnClickListener {
                 try
                 {
                     responseBody = response.body().toString();
-                    Log.i("responseBodyParser",responseBody);
 
                     Type type = new TypeToken<ArrayList<Profile>>(){}.getType();
                     ArrayList<Profile> arrayList = JSONParser.getFromJSONtoArrayList(responseBody, type);
                     profileRepository = new ProfileRepository(arrayList);
 
                 } catch (Exception e) {
-                    Log.e("onResponse", "There is an error");
                     e.printStackTrace();
                 }
             }

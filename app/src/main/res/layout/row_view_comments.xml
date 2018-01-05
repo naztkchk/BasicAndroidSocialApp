@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="10dp">
+
+    <TextView
+        android:id="@+id/row_view_comment_email_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="textStart"
+        android:layout_gravity="start"
+        android:text="dfsdfsdfsd@i.dsfs"/>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/row_view_comment_body_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="dfssdfsdfsdfsd"/>
+
+</android.support.v7.widget.CardView>
