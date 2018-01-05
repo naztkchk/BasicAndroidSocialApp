@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,8 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static java.lang.Integer.parseInt;
 
 public class ProfilesFragment extends Fragment implements View.OnClickListener {
 
@@ -91,6 +94,7 @@ public class ProfilesFragment extends Fragment implements View.OnClickListener {
             }
             case R.id.profile_search_fab: {
                 final EditText idEdit = new EditText(mContext);
+                idEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
                 AlertDialog dialog = new AlertDialog.Builder(mContext)
                         .setTitle("Search profile")
                         .setMessage("Enter an id of profile")
@@ -98,9 +102,8 @@ public class ProfilesFragment extends Fragment implements View.OnClickListener {
                         .setPositiveButton("Search", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                int id = Integer.parseInt(String.valueOf(idEdit.getText()));
-
-                                if (profileRepository.getById(id) == null) {
+                                String id  = idEdit.getText().toString();
+                                if (id.matches("") || profileRepository.getById(parseInt(id)) == null) {
                                     Toast.makeText(mContext, "Not Found", Toast.LENGTH_SHORT).show();
                                 } else {
                                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
