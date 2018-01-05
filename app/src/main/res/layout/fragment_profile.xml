@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    >
+    android:background="?attr/colorPrimary"
+    android:orientation="vertical">
 
     <!--Header-->
     <RelativeLayout
@@ -20,16 +18,14 @@
             <ImageView
                 android:id="@+id/profile_photo_iv"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
-            </ImageView>
+                android:layout_height="200dp"></ImageView>
 
             <ImageView
                 android:id="@+id/profile_photo_edit_iv"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_centerInParent="true"
-                android:background="@mipmap/ic_add_photo">
-            </ImageView>
+                android:background="@mipmap/ic_add_photo"></ImageView>
         </RelativeLayout>
 
         <!--Edit profile-->
@@ -38,10 +34,9 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="10dp"
             android:layout_marginRight="50dp"
-            android:background="@mipmap/ic_edit"
-            />
+            android:layout_marginTop="10dp"
+            android:background="@mipmap/ic_edit" />
 
         <!--Menu-->
         <ImageView
@@ -49,20 +44,41 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:background="@mipmap/ic_more_vert"/>
+            android:layout_marginTop="10dp"
+            android:background="@mipmap/ic_more_vert" />
 
         <!--Profile name-->
         <TextView
             android:id="@+id/profile_name"
-            android:text="Nazar Tkachuk"
-            android:textColor="@color/white"
-            android:textSize="30sp"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
             android:paddingLeft="10dp"
-            android:layout_alignParentBottom="true" />
+            android:text="Nazar Tkachuk"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/profile_username"
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:paddingLeft="10dp"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/profile_id"
+            android:layout_width="60dp"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:paddingRight="20dp"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:layout_alignParentRight="true" />
+
     </RelativeLayout>
 
     <!--Info of profile-->
@@ -74,9 +90,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:orientation="vertical">
+            android:paddingRight="10dp">
 
             <!--Main buttons-->
             <LinearLayout
@@ -87,30 +103,29 @@
 
                 <Button
                     android:id="@+id/send_message_btn"
-                    android:text="Send message"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    />
+                    android:text="Send message" />
 
                 <Button
                     android:id="@+id/follow_btn"
-                    android:text="Follow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:text="Follow" />
             </LinearLayout>
 
             <!--Status of profile-->
             <TextView
-                android:id="@+id/profile_status"
-                android:text="Ukraine, Lviv. Student."
-                android:textSize="17sp"
-                android:paddingTop="15dp"
-                android:textAlignment="center"
+                android:id="@+id/profile_city"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:text="Ukraine, Lviv. Student."
+                android:textAlignment="center"
+                android:textSize="17sp" />
 
             <View
                 android:layout_width="match_parent"
@@ -128,8 +143,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="4">
+                    android:layout_weight="4"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/profile_mobile_tv"
@@ -140,11 +155,10 @@
                         android:textSize="20sp" />
 
                     <TextView
-                        android:text="mobile"
-                        android:textSize="15sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        />
+                        android:text="mobile"
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <ImageView
@@ -170,8 +184,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="4">
+                    android:layout_weight="4"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/profile_email"
@@ -182,11 +196,10 @@
                         android:textSize="20sp" />
 
                     <TextView
-                        android:text="email"
-                        android:textSize="15sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        />
+                        android:text="email"
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <ImageView
@@ -205,13 +218,12 @@
 
             <!--About profile-->
             <TextView
-                android:id="@+id/profile_about_tv"
-                android:text="about test test test test test test
-                test test test test test"
-                android:textSize="17sp"
+                android:id="@+id/profile_company"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="20dp"/>
+                android:paddingTop="20dp"
+                android:layout_gravity="start"
+                android:textSize="17sp" />
 
         </LinearLayout>
 

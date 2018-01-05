@@ -73,6 +73,10 @@ public class Profile {
         return address;
     }
 
+    public String getCity(){
+        return this.getAddress().getCity();
+    }
+
     public void setAddress(Address address) {
         this.address = address;
     }
@@ -97,12 +101,16 @@ public class Profile {
         return company;
     }
 
+    public String getNameofCompany(){
+        return this.getCompany().getName();
+    }
+
     public void setCompany(Company company) {
         this.company = company;
     }
 }
 
- class Address{
+class Address{
 
     @SerializedName("street")
     @Expose

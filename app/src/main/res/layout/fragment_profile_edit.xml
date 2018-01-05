@@ -53,6 +53,18 @@
             android:paddingLeft="10dp"
             android:textColor="@color/white"
             android:textSize="30sp" />
+
+
+        <EditText
+            android:id="@+id/profile_edit_id_et"
+            android:layout_width="60dp"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:paddingRight="20dp"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:layout_alignParentRight="true" />
     </RelativeLayout>
 
     <!--Info of profile-->
@@ -94,7 +106,7 @@
 
             <!--Status of profile-->
             <EditText
-                android:id="@+id/profile_status_edit_et"
+                android:id="@+id/profile_city_edit_et"
                 android:textSize="17sp"
                 android:paddingTop="15dp"
                 android:layout_gravity="center"
@@ -193,7 +205,7 @@
 
             <!--About profile-->
             <EditText
-                android:id="@+id/profile_about_edit_et"
+                android:id="@+id/profile_company_edit_et"
                 android:textSize="17sp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"

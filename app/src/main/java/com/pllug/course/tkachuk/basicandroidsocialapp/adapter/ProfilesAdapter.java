@@ -52,9 +52,9 @@ public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesAdapter.ViewHo
 
         public ViewHolder(View itemView) {
             super(itemView);
-            name_tv = itemView.findViewById(R.id.profile_name_tv);
-            id_tv = itemView.findViewById(R.id.profile_id_tv);
-            email_tv = itemView.findViewById(R.id.profile_email_tv);
+            name_tv = itemView.findViewById(R.id.row_profile_name_tv);
+            id_tv = itemView.findViewById(R.id.row_profile_id_tv);
+            email_tv = itemView.findViewById(R.id.row_profile_email_tv);
         }
     }
 }

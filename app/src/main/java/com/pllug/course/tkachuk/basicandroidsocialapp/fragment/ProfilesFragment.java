@@ -106,11 +106,13 @@ public class ProfilesFragment extends Fragment implements View.OnClickListener {
                                 if (id.matches("") || profileRepository.getById(parseInt(id)) == null) {
                                     Toast.makeText(mContext, "Not Found", Toast.LENGTH_SHORT).show();
                                 } else {
+                                    ProfileFragment profileFragment = new ProfileFragment();
                                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                                     fragmentManager.beginTransaction()
-                                            .replace(R.id.fragment_main_container, new ProfileFragment())
+                                            .replace(R.id.fragment_main_container, profileFragment)
                                             .addToBackStack(null)
                                             .commit();
+                                    profileFragment.setProfile(profileRepository.getById(parseInt(id)));
                                 }
                             }
                         })
