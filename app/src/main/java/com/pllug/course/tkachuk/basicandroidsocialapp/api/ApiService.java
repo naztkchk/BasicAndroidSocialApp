@@ -24,8 +24,11 @@ public interface ApiService {
     @GET("/comments")
     Call<JsonArray> getComments();
 
-    @GET("/comments")
-    Call<JsonArray> getCommentsById(@Query("postId") int id);
+//    @GET("/comments")
+//    Call<JsonArray> getCommentsById(@Query("postId") int id);
+
+    @GET("/posts/{postId}/comments")
+    Call<JsonArray> getCommentsById(@Path("postId") String postId);
 
     @GET("/todos")
     Call<JsonArray> getTodos();

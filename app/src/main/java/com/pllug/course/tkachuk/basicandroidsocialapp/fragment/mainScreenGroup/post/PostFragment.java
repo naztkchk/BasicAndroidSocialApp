@@ -66,41 +66,36 @@ public class PostFragment extends Fragment {
         full_post_title_tv = root.findViewById(R.id.full_post_title_tv);
         full_post_body_tv = root.findViewById(R.id.full_post_body_tv);
 
-
-        if(commentRepository != null){
-            setComments();
-            Toast.makeText(mContext, "Set comments", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
-            Toast.makeText(mContext, "commentRepository is null", Toast.LENGTH_SHORT).show();
-        }
-        return root;
-    }
-
-    public void setPost (Post post){
-        this.post = post;
-
-        if(InternetConnection.checkConnection(mContext)){
-        loadComments(post.getId());
-        }
-        else Toast.makeText(mContext, "No internet connection", Toast.LENGTH_SHORT).show();
-    }
-
-    public void setComments(){
-        Log.i("setComments", "start");
         full_post_author_tv.setText(String.valueOf(post.getUserId()));
         full_post_id_tv.setText(String.valueOf(post.getId()));
         full_post_title_tv.setText(post.getTitle());
         full_post_body_tv.setText(post.getBody());
 
-        if((commentRepository.getCommentsListToPost(post.getId()) == null) || commentRepository==null){
-            Toast.makeText(mContext, "Comments not found!", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            adapter = new CommentAdapter(getContext(), commentRepository.getCommentsListToPost(post.getId()));
-            recyclerView.setAdapter(adapter);
-        }
+//        if(InternetConnection.checkConnection(mContext)){
+//
+//        }
+//        else Toast.makeText(mContext, "No internet connection", Toast.LENGTH_SHORT).show();
+
+//        if(commentRepository != null){
+//            //setComments();
+//            Toast.makeText(mContext, "Set comments", Toast.LENGTH_SHORT).show();
+//        }
+//        else
+//        {
+//            Toast.makeText(mContext, "commentRepository is null", Toast.LENGTH_SHORT).show();
+//        }
+        return root;
+    }
+
+    public void setPost (Post post){
+        this.post = post;
+        loadComments(post.getId());
+    }
+
+    public void setComments(){
+        Log.i("setComments", "start");
+        adapter = new CommentAdapter(getContext(), commentRepository.getList());
+        recyclerView.setAdapter(adapter);
     }
 
     public void loadComments(int postId) {
@@ -111,7 +106,7 @@ public class PostFragment extends Fragment {
 
         Log.e("loadComments", "afterAPI");
         //Calling Json
-        Call<JsonArray> jsonArrayCall = api.getCommentsById(postId);
+        Call<JsonArray> jsonArrayCall = api.getCommentsById(String.valueOf(postId));
 
         Log.e("loadComments", "afterjsonArrayCall");
 
@@ -128,6 +123,8 @@ public class PostFragment extends Fragment {
                     ArrayList<Comment> arrayList = JSONParser.getFromJSONtoArrayList(responseBody, type);
                     Log.i("arrayListComments", arrayList.toString());
                     commentRepository = new CommentRepository(arrayList);
+
+                    setComments();
 
                 } catch (Exception e) {
                     Log.e("loadComments", "There is an error");
