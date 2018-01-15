@@ -17,6 +17,14 @@ public class Comment {
     @Expose
     private String name;
 
+    @SerializedName("email")
+    @Expose
+    private String email;
+
+    @SerializedName("body")
+    @Expose
+    private String body;
+
     public int getPostId() {
         return postId;
     }
@@ -56,12 +64,4 @@ public class Comment {
     public void setBody(String body) {
         this.body = body;
     }
-
-    @SerializedName("email")
-    @Expose
-    private String email;
-
-    @SerializedName("body")
-    @Expose
-    private String body;
 }

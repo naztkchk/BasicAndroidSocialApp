@@ -4,6 +4,8 @@ import com.google.gson.JsonArray;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -18,4 +20,10 @@ public interface ApiService {
 
     @GET("/posts")
     Call<JsonArray> getPosts();
+
+    @GET("/comments")
+    Call<JsonArray> getComments();
+
+    @GET("/comments")
+    Call<JsonArray> getCommentsById(@Query("postId") int id);
 }

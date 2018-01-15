@@ -8,10 +8,10 @@ import android.widget.Toast;
 
 import com.pllug.course.tkachuk.basicandroidsocialapp.R;
 import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.AboutFragment;
-import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.ForgotPasswordFragment;
-import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.ProfilesFragment;
-import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.SignInFragment;
-import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.SignUpFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.authorizationGroup.ForgotPasswordFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.mainScreenGroup.profile.ProfilesFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.authorizationGroup.SignInFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.authorizationGroup.SignUpFragment;
 
 public class AuthorizationActivity extends AppCompatActivity {
 

@@ -17,9 +17,9 @@ import android.widget.Toast;
 
 import com.pllug.course.tkachuk.basicandroidsocialapp.R;
 import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.AboutFragment;
-import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.PostFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.mainScreenGroup.post.PostsFragment;
 import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.ImageFragment;
-import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.ProfilesFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.mainScreenGroup.profile.ProfilesFragment;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener
 {
@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 .commit();
     }
 
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -77,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 break;
 
             case R.id.nav_posts:
-                replaceFragment(new PostFragment());
+                replaceFragment(new PostsFragment());
                 break;
 
             case R.id.nav_images:
@@ -85,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 break;
 
             case R.id.nav_albums:
-                replaceFragment(new PostFragment());
+                replaceFragment(new PostsFragment());
                 break;
 
             case R.id.nav_settings:

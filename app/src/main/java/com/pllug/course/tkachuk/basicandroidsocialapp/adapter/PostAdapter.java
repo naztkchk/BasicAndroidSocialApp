@@ -1,19 +1,20 @@
 package com.pllug.course.tkachuk.basicandroidsocialapp.adapter;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.mainScreenGroup.post.PostFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.utils.ItemClickListener;
 import com.pllug.course.tkachuk.basicandroidsocialapp.R;
-import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.ProfilesFragment;
 import com.pllug.course.tkachuk.basicandroidsocialapp.model.Post;
-import com.pllug.course.tkachuk.basicandroidsocialapp.model.Profile;
-import com.pllug.course.tkachuk.basicandroidsocialapp.reposisitory.ProfileRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +23,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     private Context mContext;
     private List<Post> postList = new ArrayList<>();
-    ProfileRepository profileRepository;
+    FragmentManager fragmentManager;
 
-    public PostAdapter(Context context, ArrayList<Post> list){
+    public PostAdapter( Context context, ArrayList<Post> list){
         this.mContext = context;
         this.postList = list;
+        fragmentManager= ((AppCompatActivity) mContext).getSupportFragmentManager();
     }
 
     @Override
@@ -38,24 +40,41 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         final Post post = postList.get(position);
 
-//        ProfileRepository profileRepository = new ProfileRepository();
-//        new ProfilesFragment().loadData();
-//        if(profileRepository.getById(post.getId())!= null){
-//
-//            Profile profile = profileRepository.getById(post.getId());
-//            holder.author_tv.setText(profile.getName());
-//        }
-//        else
-            holder.author_tv.setText(String.valueOf(post.getId()));
+        holder.author_tv.setText(String.valueOf(post.getId()));
 
         holder.id_tv.setText(String.valueOf(post.getId()));
         holder.title_tv.setText(post.getTitle());
         holder.body_tv.setText(post.getBody());
 
-        //TODO get count of comments and set button text
+        holder.see_comments_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext, "Button click - id"+post.getId(), Toast.LENGTH_SHORT).show();
+
+                PostFragment postFragment = new PostFragment();
+                FragmentManager fragmentManager = ((AppCompatActivity)mContext).getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragment_main_container, postFragment)
+                        .addToBackStack(null)
+                        .commit();
+                postFragment.setPost(post);
+            }
+        });
+
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void Onclick(View view, int position, boolean isLongClick) {
+                if(isLongClick){
+                    Toast.makeText(mContext, "Long click - id"+post.getId(), Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(mContext, "click - id"+post.getId(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
@@ -63,7 +82,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return postList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 
         public TextView author_tv;
         public TextView id_tv;
@@ -72,6 +92,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         Button see_comments_btn;
 
+        private ItemClickListener itemClickListener;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -82,6 +103,24 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             body_tv = itemView.findViewById(R.id.row_post_body_tv);
 
             see_comments_btn = itemView.findViewById(R.id.row_post_see_comments_btn);
+
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
+        }
+
+        public void setItemClickListener(ItemClickListener itemClickListener){
+            this.itemClickListener = itemClickListener;
+        }
+
+        @Override
+        public void onClick(View view) {
+            itemClickListener.Onclick(view,getAdapterPosition(),false);
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            itemClickListener.Onclick(view, getAdapterPosition(), true);
+            return true;
         }
     }
 }
