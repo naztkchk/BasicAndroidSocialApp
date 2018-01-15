@@ -13,18 +13,18 @@ import com.pllug.course.tkachuk.basicandroidsocialapp.model.Profile;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesAdapter.ViewHolder> {
+public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHolder> {
 
     private Context mContext;
     private List<Profile> profileList = new ArrayList<>();
 
-    public ProfilesAdapter(Context mContext, List list) {
+    public ProfileAdapter(Context mContext, List list) {
         this.mContext = mContext;
         this.profileList = list;
     }
 
     @Override
-    public ProfilesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ProfileAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.row_view_profile, parent, false);
         return new ViewHolder(view);

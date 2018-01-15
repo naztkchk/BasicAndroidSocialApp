@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.pllug.course.tkachuk.basicandroidsocialapp.R;
 import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.AboutFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.mainScreenGroup.TodoFragment;
 import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.mainScreenGroup.post.PostsFragment;
 import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.ImageFragment;
 import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.mainScreenGroup.profile.ProfilesFragment;
@@ -85,6 +86,10 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
             case R.id.nav_albums:
                 replaceFragment(new PostsFragment());
+                break;
+
+            case R.id.nav_todo:
+                replaceFragment(new TodoFragment());
                 break;
 
             case R.id.nav_settings:
