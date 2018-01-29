@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.mainScreenGroup.post.PostFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.ui.mainGroup.post.PostFragment;
 import com.pllug.course.tkachuk.basicandroidsocialapp.utils.ItemClickListener;
 import com.pllug.course.tkachuk.basicandroidsocialapp.R;
 import com.pllug.course.tkachuk.basicandroidsocialapp.model.Post;

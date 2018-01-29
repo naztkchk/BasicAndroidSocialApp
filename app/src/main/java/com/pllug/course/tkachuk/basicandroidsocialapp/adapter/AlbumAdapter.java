@@ -54,11 +54,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
         public ViewHolder (View view){
             super(view);
+
             //initialize the View objects
             textViewTitle =  view.findViewById(R.id.album_title_tv);
             textViewId =  view.findViewById(R.id.album_id_tv);
             textViewUserId =  view.findViewById(R.id.album_userId_tv);
         }
     }
-
 }
