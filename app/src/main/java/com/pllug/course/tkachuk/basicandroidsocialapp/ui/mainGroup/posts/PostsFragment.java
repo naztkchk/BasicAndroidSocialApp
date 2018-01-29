@@ -1,4 +1,4 @@
-package com.pllug.course.tkachuk.basicandroidsocialapp.fragment;
+package com.pllug.course.tkachuk.basicandroidsocialapp.ui.mainGroup.posts;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,21 +9,23 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
 import com.pllug.course.tkachuk.basicandroidsocialapp.R;
-import com.pllug.course.tkachuk.basicandroidsocialapp.adapter.AlbumAdapter;
+import com.pllug.course.tkachuk.basicandroidsocialapp.adapter.PostAdapter;
 import com.pllug.course.tkachuk.basicandroidsocialapp.api.ApiService;
 import com.pllug.course.tkachuk.basicandroidsocialapp.api.RetroClient;
-import com.pllug.course.tkachuk.basicandroidsocialapp.model.Album;
-import com.pllug.course.tkachuk.basicandroidsocialapp.reposisitory.AlbumRepository;
+import com.pllug.course.tkachuk.basicandroidsocialapp.model.Post;
+import com.pllug.course.tkachuk.basicandroidsocialapp.reposisitory.PostRepository;
 import com.pllug.course.tkachuk.basicandroidsocialapp.utils.InternetConnection;
 import com.pllug.course.tkachuk.basicandroidsocialapp.utils.JSONParser;
 
@@ -34,32 +36,37 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AlbumFragment extends Fragment implements View.OnClickListener{
+import static java.lang.Integer.parseInt;
+
+public class PostsFragment extends Fragment implements View.OnClickListener{
 
     private View root;
     private Context mContext;
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    AlbumRepository albumRepository;
+    PostRepository postRepository;
     private String responseBody;
 
     FloatingActionButton downloadAll_fab;
     FloatingActionButton search_fab;
 
+    Button see_comments;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_albums, container, false);
+        root = inflater.inflate(R.layout.fragment_posts, container, false);
         mContext = root.getContext();
 
-        recyclerView = (RecyclerView) root.findViewById(R.id.albums_rv);
+        recyclerView = (RecyclerView) root.findViewById(R.id.post_rv);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(layoutManager);
 
-        downloadAll_fab = (FloatingActionButton) root.findViewById(R.id.album_update_fab);
-        search_fab = (FloatingActionButton) root.findViewById(R.id.album_search_fab);;
+        downloadAll_fab = (FloatingActionButton) root.findViewById(R.id.post_update_fab);
+        search_fab = (FloatingActionButton) root.findViewById(R.id.post_search_fab);
+        see_comments = root.findViewById(R.id.row_post_see_comments_btn);
 
         if(InternetConnection.checkConnection(mContext)) {
             downloadAll_fab.setOnClickListener(this);
@@ -75,28 +82,30 @@ public class AlbumFragment extends Fragment implements View.OnClickListener{
 
         switch (view.getId()) {
 
-            case R.id.album_update_fab: {
+            case R.id.post_update_fab: {
                 //Binding that List to Adapter
-                adapter = new AlbumAdapter(getContext(), albumRepository.getList());
+                PostAdapter postAdapter = new PostAdapter(getContext(), postRepository.getList());
+                adapter = postAdapter;
                 recyclerView.setAdapter(adapter);
                 break;
             }
-            case R.id.album_search_fab: {
-                final EditText titleEdit = new EditText(mContext);
+
+            case R.id.post_search_fab: {
+                final EditText idEdit = new EditText(mContext);
+                idEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
                 AlertDialog dialog = new AlertDialog.Builder(mContext)
-                        .setTitle("Search album")
-                        .setMessage("Enter a title of album")
-                        .setView(titleEdit)
+                        .setTitle("Search post")
+                        .setMessage("Enter an id of post")
+                        .setView(idEdit)
                         .setPositiveButton("Search", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                String title = String.valueOf(titleEdit.getText());
-
-                                if (albumRepository.getByName(title) == null) {
+                                String id  = idEdit.getText().toString();
+                                if (id.matches("") || postRepository.getById(parseInt(id)) == null) {
                                     Toast.makeText(mContext, "Not Found", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    adapter = new AlbumAdapter(mContext,
-                                            albumRepository.getByName(title));
+                                    adapter = new PostAdapter(mContext,
+                                            postRepository.getById(parseInt(id)));
                                     recyclerView.setAdapter(adapter);
                                 }
                             }
@@ -110,24 +119,32 @@ public class AlbumFragment extends Fragment implements View.OnClickListener{
     }
 
     private void loadData(){
+
+        Log.i("loadData", "postFragment");
         //Creating an object for our api interface
         ApiService api = RetroClient.getRetroClient();
 
         //Calling Json
-        Call<JsonArray> jsonArrayCall = api.getAlbums();
+        Call<JsonArray> jsonArrayCall = api.getPosts();
 
         //Enqueue Callback will be call when get response...
+
+        Log.i("loadData", "before");
+
         jsonArrayCall.enqueue(new Callback<JsonArray>() {
             @Override
             public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
                 try
                 {
+                    Log.i("loadData", "onResponse");
+
                     responseBody = response.body().toString();
                     Log.i("responseBodyParser",responseBody);
 
-                    Type type = new TypeToken<ArrayList<Album>>(){}.getType();
-                    ArrayList<Album> arrayList = JSONParser.getFromJSONtoArrayList(responseBody, type);
-                    albumRepository = new AlbumRepository(arrayList);
+                    Type type = new TypeToken<ArrayList<Post>>(){}.getType();
+                    ArrayList<Post> arrayList = JSONParser.getFromJSONtoArrayList(responseBody, type);
+                    Log.i("arrayList", arrayList.toString());
+                    postRepository = new PostRepository(arrayList);
 
                 } catch (Exception e) {
                     Log.e("onResponse", "There is an error");
@@ -140,4 +157,5 @@ public class AlbumFragment extends Fragment implements View.OnClickListener{
                 Log.i("onFailure", t.getMessage());
             }});
     }
+
 }

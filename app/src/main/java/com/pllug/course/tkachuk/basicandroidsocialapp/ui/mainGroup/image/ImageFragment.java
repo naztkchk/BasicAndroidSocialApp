@@ -1,4 +1,4 @@
-package com.pllug.course.tkachuk.basicandroidsocialapp.fragment;
+package com.pllug.course.tkachuk.basicandroidsocialapp.ui.mainGroup.image;
 
 import android.content.Context;
 import android.content.DialogInterface;

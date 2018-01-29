@@ -1,4 +1,4 @@
-package com.pllug.course.tkachuk.basicandroidsocialapp.fragment.mainScreenGroup.post;
+package com.pllug.course.tkachuk.basicandroidsocialapp.ui.mainGroup.post;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
@@ -22,7 +21,6 @@ import com.pllug.course.tkachuk.basicandroidsocialapp.api.RetroClient;
 import com.pllug.course.tkachuk.basicandroidsocialapp.model.Comment;
 import com.pllug.course.tkachuk.basicandroidsocialapp.model.Post;
 import com.pllug.course.tkachuk.basicandroidsocialapp.reposisitory.CommentRepository;
-import com.pllug.course.tkachuk.basicandroidsocialapp.utils.InternetConnection;
 import com.pllug.course.tkachuk.basicandroidsocialapp.utils.JSONParser;
 
 import java.lang.reflect.Type;

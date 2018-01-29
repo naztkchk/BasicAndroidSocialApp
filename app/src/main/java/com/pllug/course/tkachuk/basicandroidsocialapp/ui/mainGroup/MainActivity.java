@@ -1,4 +1,4 @@
-package com.pllug.course.tkachuk.basicandroidsocialapp.activity;
+package com.pllug.course.tkachuk.basicandroidsocialapp.ui.mainGroup;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,11 +16,10 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.pllug.course.tkachuk.basicandroidsocialapp.R;
-import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.AboutFragment;
-import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.mainScreenGroup.TodoFragment;
-import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.mainScreenGroup.post.PostsFragment;
-import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.ImageFragment;
-import com.pllug.course.tkachuk.basicandroidsocialapp.fragment.mainScreenGroup.profile.ProfilesFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.ui.mainGroup.image.ImageFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.ui.mainGroup.posts.PostsFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.ui.mainGroup.profiles.ProfilesFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.ui.mainGroup.todo.TodoFragment;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener
 {
@@ -94,10 +93,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
             case R.id.nav_settings:
                 Toast.makeText(this, "settings choose", Toast.LENGTH_SHORT).show();
-                break;
-
-            case R.id.nav_about:
-                replaceFragment(new AboutFragment());
                 break;
         }
 

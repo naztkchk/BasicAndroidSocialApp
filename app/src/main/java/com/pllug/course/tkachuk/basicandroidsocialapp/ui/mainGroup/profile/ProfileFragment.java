@@ -1,4 +1,4 @@
-package com.pllug.course.tkachuk.basicandroidsocialapp.fragment.mainScreenGroup.profile;
+package com.pllug.course.tkachuk.basicandroidsocialapp.ui.mainGroup.profile;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

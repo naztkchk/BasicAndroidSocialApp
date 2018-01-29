@@ -1,4 +1,4 @@
-package com.pllug.course.tkachuk.basicandroidsocialapp.fragment.mainScreenGroup.profile;
+package com.pllug.course.tkachuk.basicandroidsocialapp.ui.mainGroup.profiles;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -26,6 +26,7 @@ import com.pllug.course.tkachuk.basicandroidsocialapp.api.ApiService;
 import com.pllug.course.tkachuk.basicandroidsocialapp.api.RetroClient;
 import com.pllug.course.tkachuk.basicandroidsocialapp.model.Profile;
 import com.pllug.course.tkachuk.basicandroidsocialapp.reposisitory.ProfileRepository;
+import com.pllug.course.tkachuk.basicandroidsocialapp.ui.mainGroup.profile.ProfileFragment;
 import com.pllug.course.tkachuk.basicandroidsocialapp.utils.InternetConnection;
 import com.pllug.course.tkachuk.basicandroidsocialapp.utils.JSONParser;
 
