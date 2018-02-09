@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.pllug.course.tkachuk.basicandroidsocialapp.R;
-import com.pllug.course.tkachuk.basicandroidsocialapp.model.Profile;
+import com.pllug.course.tkachuk.basicandroidsocialapp.data.model.Profile;
 
 
 public class ProfileFragment extends Fragment {

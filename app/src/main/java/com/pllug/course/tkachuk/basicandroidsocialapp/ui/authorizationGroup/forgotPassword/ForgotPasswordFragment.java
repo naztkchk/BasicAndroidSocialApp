@@ -13,8 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pllug.course.tkachuk.basicandroidsocialapp.R;
-import com.pllug.course.tkachuk.basicandroidsocialapp.ui.authorizationGroup.signIn.SignInFragment;
-import com.pllug.course.tkachuk.basicandroidsocialapp.ui.authorizationGroup.signUp.SignUpFragment;
 
 public class ForgotPasswordFragment extends Fragment implements IForgotPasswordView {
 
@@ -63,13 +61,6 @@ public class ForgotPasswordFragment extends Fragment implements IForgotPasswordV
         backToSignIn_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                fragmentManager
-//                        .beginTransaction()
-//                        .replace(R.id.fragment_authorization_container,
-//                                new SignInFragment())
-//                        .addToBackStack(null)
-//                        .commit();
                 forgotPasswordPresenter.showSignIn();
             }
         });
@@ -82,6 +73,6 @@ public class ForgotPasswordFragment extends Fragment implements IForgotPasswordV
 
     @Override
     public void showEmailError() {
-        email_et.setError("Please enter login");
+        email_et.setError("Please enter email");
     }
 }

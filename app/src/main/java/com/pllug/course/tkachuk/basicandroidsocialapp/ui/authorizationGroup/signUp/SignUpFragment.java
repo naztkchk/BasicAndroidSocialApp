@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.pllug.course.tkachuk.basicandroidsocialapp.R;
-import com.pllug.course.tkachuk.basicandroidsocialapp.ui.authorizationGroup.signIn.SignInFragment;
 
 public class SignUpFragment extends Fragment implements ISignUpView {
 
@@ -78,14 +77,6 @@ public class SignUpFragment extends Fragment implements ISignUpView {
         alreadyHaveAccount_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                fragmentManager
-//                        .beginTransaction()
-//                        .replace(R.id.fragment_authorization_container,
-//                                new SignInFragment())
-//                        .addToBackStack(null)
-//                        .commit();
-
                 signUpPresenter.showSignIn();
             }
         });
@@ -108,6 +99,6 @@ public class SignUpFragment extends Fragment implements ISignUpView {
 
     @Override
     public void showPasswordError() {
-        password_te.setError("Please enter login");
+        password_te.setError("Please enter password");
     }
 }

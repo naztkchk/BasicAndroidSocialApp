@@ -1,6 +1,5 @@
 package com.pllug.course.tkachuk.basicandroidsocialapp.ui.mainGroup;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,12 +12,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.pllug.course.tkachuk.basicandroidsocialapp.R;
+import com.pllug.course.tkachuk.basicandroidsocialapp.ui.mainGroup.about.AboutFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.ui.mainGroup.album.AlbumFragment;
 import com.pllug.course.tkachuk.basicandroidsocialapp.ui.mainGroup.image.ImageFragment;
 import com.pllug.course.tkachuk.basicandroidsocialapp.ui.mainGroup.posts.PostsFragment;
 import com.pllug.course.tkachuk.basicandroidsocialapp.ui.mainGroup.profiles.ProfilesFragment;
+import com.pllug.course.tkachuk.basicandroidsocialapp.ui.mainGroup.settings.SettingFragment;
 import com.pllug.course.tkachuk.basicandroidsocialapp.ui.mainGroup.todo.TodoFragment;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener
@@ -48,6 +49,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
         //Add Home button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        replaceFragment(new ProfilesFragment());
+        getSupportActionBar().setTitle("Profile");
     }
 
     public void replaceFragment(Fragment fragment){
@@ -68,31 +72,42 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        Intent intent;
+        getSupportFragmentManager().popBackStack();
 
         switch (item.getItemId()){
             case R.id.nav_profile:
                 replaceFragment(new ProfilesFragment());
+                getSupportActionBar().setTitle("Profile");
                 break;
 
             case R.id.nav_posts:
                 replaceFragment(new PostsFragment());
+                getSupportActionBar().setTitle("Posts");
                 break;
 
             case R.id.nav_images:
                 replaceFragment(new ImageFragment());
+                getSupportActionBar().setTitle("Images");
                 break;
 
             case R.id.nav_albums:
-                replaceFragment(new PostsFragment());
+                replaceFragment(new AlbumFragment());
+                getSupportActionBar().setTitle("Albums");
                 break;
 
             case R.id.nav_todo:
                 replaceFragment(new TodoFragment());
+                getSupportActionBar().setTitle("TODO");
                 break;
 
             case R.id.nav_settings:
-                Toast.makeText(this, "settings choose", Toast.LENGTH_SHORT).show();
+                replaceFragment(new SettingFragment());
+                getSupportActionBar().setTitle("Settings");
+                break;
+
+            case R.id.nav_about:
+                replaceFragment(new AboutFragment());
+                getSupportActionBar().setTitle("About");
                 break;
         }
 
@@ -107,7 +122,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             return true;
         return super.onOptionsItemSelected(item);
     }
-
 
     private void initView() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);

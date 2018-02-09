@@ -1,11 +1,9 @@
 package com.pllug.course.tkachuk.basicandroidsocialapp.ui.authorizationGroup.signIn;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.pllug.course.tkachuk.basicandroidsocialapp.R;
-import com.pllug.course.tkachuk.basicandroidsocialapp.ui.authorizationGroup.forgotPassword.ForgotPasswordFragment;
-import com.pllug.course.tkachuk.basicandroidsocialapp.ui.authorizationGroup.signUp.SignUpFragment;
 
 public class SignInFragment extends Fragment implements ISignInView {
 
@@ -74,14 +70,6 @@ public class SignInFragment extends Fragment implements ISignInView {
         forgotPassword_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                fragmentManager
-//                        .beginTransaction()
-//                        .replace(R.id.fragment_authorization_container,
-//                                new ForgotPasswordFragment())
-//                        .addToBackStack(null)
-//                        .commit();
-
-
                 signInPresenter.showForgotPassword();
             }
         });
@@ -89,12 +77,6 @@ public class SignInFragment extends Fragment implements ISignInView {
         createAccount_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                fragmentManager
-//                        .beginTransaction()
-//                        .replace(R.id.fragment_authorization_container,
-//                                new SignUpFragment())
-//                                .addToBackStack(null)
-//                        .commit();
                 signInPresenter.showSignUp();
             }
         });
@@ -102,7 +84,7 @@ public class SignInFragment extends Fragment implements ISignInView {
 
     @Override
     public void showEmailError() {
-        email_et.setError("Please enter login");
+        email_et.setError("Please enter email");
     }
 
     @Override

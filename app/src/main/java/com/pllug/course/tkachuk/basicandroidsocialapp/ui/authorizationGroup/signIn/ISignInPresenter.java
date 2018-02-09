@@ -3,6 +3,4 @@ package com.pllug.course.tkachuk.basicandroidsocialapp.ui.authorizationGroup.sig
 public interface ISignInPresenter {
 
     void signIn(final String email, final String password);
-//    void showSignUp();
-//    void showForgotPassword();
 }

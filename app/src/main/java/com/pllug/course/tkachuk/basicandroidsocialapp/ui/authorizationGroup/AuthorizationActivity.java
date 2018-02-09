@@ -20,11 +20,7 @@ public class AuthorizationActivity extends AppCompatActivity implements IAuthori
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authorization);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_authorization_container, new SignInFragment())
-                .addToBackStack(null);
-                fragmentTransaction.commit();
+        replaceFragment(new SignInFragment());
     }
 
     public void replaceFragment(Fragment fragment){

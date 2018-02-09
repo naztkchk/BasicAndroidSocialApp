@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,74 +14,87 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.JsonArray;
-import com.google.gson.reflect.TypeToken;
 import com.pllug.course.tkachuk.basicandroidsocialapp.R;
-import com.pllug.course.tkachuk.basicandroidsocialapp.adapter.AlbumAdapter;
-import com.pllug.course.tkachuk.basicandroidsocialapp.api.ApiService;
-import com.pllug.course.tkachuk.basicandroidsocialapp.api.RetroClient;
-import com.pllug.course.tkachuk.basicandroidsocialapp.model.Album;
-import com.pllug.course.tkachuk.basicandroidsocialapp.reposisitory.AlbumRepository;
-import com.pllug.course.tkachuk.basicandroidsocialapp.utils.InternetConnection;
-import com.pllug.course.tkachuk.basicandroidsocialapp.utils.JSONParser;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-public class AlbumFragment extends Fragment implements View.OnClickListener{
+public class AlbumFragment extends Fragment implements IAlbumView, View.OnClickListener{
 
     private View root;
     private Context mContext;
-
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
-    AlbumRepository albumRepository;
-    private String responseBody;
+    private FloatingActionButton search_fab;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
-    FloatingActionButton downloadAll_fab;
-    FloatingActionButton search_fab;
+    private AlbumPresenter albumPresenter;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_albums, container, false);
+
         mContext = root.getContext();
 
-        recyclerView = (RecyclerView) root.findViewById(R.id.albums_rv);
-        recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext);
-        recyclerView.setLayoutManager(layoutManager);
+        initView();
+        initPresenter();
+        initListener();
 
-        downloadAll_fab = (FloatingActionButton) root.findViewById(R.id.album_update_fab);
-        search_fab = (FloatingActionButton) root.findViewById(R.id.album_search_fab);;
+        setEnabledSearch(false);
 
-        if(InternetConnection.checkConnection(mContext)) {
-            downloadAll_fab.setOnClickListener(this);
-            search_fab.setOnClickListener(this);
-            loadData();
-        }
-        else Toast.makeText(mContext, "No internet connection", Toast.LENGTH_SHORT).show();
+        albumPresenter.loadData();
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    albumPresenter.loadData();
+                }
+        });
 
         return root;
     }
 
+    private void initView() {
+        search_fab = root.findViewById(R.id.album_search_fab);
+        swipeRefreshLayout = root.findViewById(R.id.swiperefresh1);
+        recyclerView =  root.findViewById(R.id.albums_rv);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext);
+        recyclerView.setLayoutManager(layoutManager);
+    }
+
+    private void initPresenter() {
+        albumPresenter = new AlbumPresenter(this, mContext);
+    }
+
+    private void initListener() {
+        search_fab.setOnClickListener(this);
+    }
+
+    private void showProgressLoaderWithBackground (boolean visibility, String text) {
+        if (text == null)
+            text = "";
+        ((TextView) root.findViewById(R.id.progress_bar_text)).setText(text);
+
+        if(visibility){
+            root.findViewById(R.id.container_progress_bar).setVisibility(View.VISIBLE);
+            getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        }
+        else
+        {
+            root.findViewById(R.id.container_progress_bar).setVisibility(View.GONE);
+            getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        }
+
+        Log.i("ProgressloaderAlbum", visibility ? "start" : "finish");
+    }
+
+    @Override
     public void onClick (View view){
-
         switch (view.getId()) {
-
-            case R.id.album_update_fab: {
-                //Binding that List to Adapter
-                adapter = new AlbumAdapter(getContext(), albumRepository.getList());
-                recyclerView.setAdapter(adapter);
-                break;
-            }
             case R.id.album_search_fab: {
                 final EditText titleEdit = new EditText(mContext);
                 AlertDialog dialog = new AlertDialog.Builder(mContext)
@@ -91,14 +105,7 @@ public class AlbumFragment extends Fragment implements View.OnClickListener{
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 String title = String.valueOf(titleEdit.getText());
-
-                                if (albumRepository.getByName(title) == null) {
-                                    Toast.makeText(mContext, "Not Found", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    adapter = new AlbumAdapter(mContext,
-                                            albumRepository.getByName(title));
-                                    recyclerView.setAdapter(adapter);
-                                }
+                                albumPresenter.searchAlbumByTitle(title);
                             }
                         })
                         .setNegativeButton("Cancel", null)
@@ -109,35 +116,34 @@ public class AlbumFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    private void loadData(){
-        //Creating an object for our api interface
-        ApiService api = RetroClient.getRetroClient();
+    @Override
+    public void showProgress() {showProgressLoaderWithBackground(true, " loading data...");}
 
-        //Calling Json
-        Call<JsonArray> jsonArrayCall = api.getAlbums();
+    @Override
+    public void hideProgress() {
+        showProgressLoaderWithBackground(false, " loading data...");
+    }
 
-        //Enqueue Callback will be call when get response...
-        jsonArrayCall.enqueue(new Callback<JsonArray>() {
-            @Override
-            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
-                try
-                {
-                    responseBody = response.body().toString();
-                    Log.i("responseBodyParser",responseBody);
+    @Override
+    public void hideRefreshing() {
+        if (swipeRefreshLayout!=null)
+            swipeRefreshLayout.setRefreshing(false);
+    }
 
-                    Type type = new TypeToken<ArrayList<Album>>(){}.getType();
-                    ArrayList<Album> arrayList = JSONParser.getFromJSONtoArrayList(responseBody, type);
-                    albumRepository = new AlbumRepository(arrayList);
+    @Override
+    public void showNotFound() {Toast.makeText(mContext, "This Album not found", Toast.LENGTH_SHORT).show();}
 
-                } catch (Exception e) {
-                    Log.e("onResponse", "There is an error");
-                    e.printStackTrace();
-                }
-            }
+    @Override
+    public void showNotInternetConnection() {
+        Toast.makeText(mContext, "No internet connection", Toast.LENGTH_SHORT).show();}
 
-            @Override
-            public void onFailure(Call<JsonArray> call, Throwable t) {
-                Log.i("onFailure", t.getMessage());
-            }});
+    @Override
+    public void setAdapter(RecyclerView.Adapter adapter) {
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void setEnabledSearch(boolean b) {
+        search_fab.setEnabled(b);
     }
 }

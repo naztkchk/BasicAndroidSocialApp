@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,44 +15,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.JsonArray;
-import com.google.gson.reflect.TypeToken;
 import com.pllug.course.tkachuk.basicandroidsocialapp.R;
-import com.pllug.course.tkachuk.basicandroidsocialapp.adapter.PostAdapter;
-import com.pllug.course.tkachuk.basicandroidsocialapp.api.ApiService;
-import com.pllug.course.tkachuk.basicandroidsocialapp.api.RetroClient;
-import com.pllug.course.tkachuk.basicandroidsocialapp.model.Post;
-import com.pllug.course.tkachuk.basicandroidsocialapp.reposisitory.PostRepository;
-import com.pllug.course.tkachuk.basicandroidsocialapp.utils.InternetConnection;
-import com.pllug.course.tkachuk.basicandroidsocialapp.utils.JSONParser;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static java.lang.Integer.parseInt;
-
-public class PostsFragment extends Fragment implements View.OnClickListener{
+public class PostsFragment extends Fragment implements IPostView, View.OnClickListener{
 
     private View root;
     private Context mContext;
 
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
-    PostRepository postRepository;
-    private String responseBody;
+    private FloatingActionButton search_fab;
 
-    FloatingActionButton downloadAll_fab;
-    FloatingActionButton search_fab;
+    private PostPresenter postPresenter;
 
-    Button see_comments;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
     @Override
@@ -59,37 +40,42 @@ public class PostsFragment extends Fragment implements View.OnClickListener{
         root = inflater.inflate(R.layout.fragment_posts, container, false);
         mContext = root.getContext();
 
-        recyclerView = (RecyclerView) root.findViewById(R.id.post_rv);
-        recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext);
-        recyclerView.setLayoutManager(layoutManager);
+        initView();
+        initListener();
+        initPresenter();
 
-        downloadAll_fab = (FloatingActionButton) root.findViewById(R.id.post_update_fab);
-        search_fab = (FloatingActionButton) root.findViewById(R.id.post_search_fab);
-        see_comments = root.findViewById(R.id.row_post_see_comments_btn);
+        postPresenter.loadData();
 
-        if(InternetConnection.checkConnection(mContext)) {
-            downloadAll_fab.setOnClickListener(this);
-            search_fab.setOnClickListener(this);
-            loadData();
-        }
-        else Toast.makeText(mContext, "No internet connection", Toast.LENGTH_SHORT).show();
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                postPresenter.loadData();
+            }
+        });
 
         return root;
     }
 
+    private void initView() {
+        recyclerView =  root.findViewById(R.id.post_rv);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext);
+        recyclerView.setLayoutManager(layoutManager);
+
+        search_fab =  root.findViewById(R.id.post_search_fab);
+        swipeRefreshLayout = root.findViewById(R.id.swiperefresh3);
+    }
+
+    private void initListener() {
+        search_fab.setOnClickListener(this);
+    }
+
+    private void initPresenter() {
+        postPresenter = new PostPresenter(this, mContext);
+    }
+
     public void onClick (View view){
-
         switch (view.getId()) {
-
-            case R.id.post_update_fab: {
-                //Binding that List to Adapter
-                PostAdapter postAdapter = new PostAdapter(getContext(), postRepository.getList());
-                adapter = postAdapter;
-                recyclerView.setAdapter(adapter);
-                break;
-            }
-
             case R.id.post_search_fab: {
                 final EditText idEdit = new EditText(mContext);
                 idEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -101,13 +87,7 @@ public class PostsFragment extends Fragment implements View.OnClickListener{
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 String id  = idEdit.getText().toString();
-                                if (id.matches("") || postRepository.getById(parseInt(id)) == null) {
-                                    Toast.makeText(mContext, "Not Found", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    adapter = new PostAdapter(mContext,
-                                            postRepository.getById(parseInt(id)));
-                                    recyclerView.setAdapter(adapter);
-                                }
+                                postPresenter.searchAPostById(id);
                             }
                         })
                         .setNegativeButton("Cancel", null)
@@ -118,44 +98,58 @@ public class PostsFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    private void loadData(){
+    private void showProgressLoaderWithBackground (boolean visibility, String text) {
+        if (text == null)
+            text = "";
+        ((TextView) root.findViewById(R.id.progress_bar_text)).setText(text);
 
-        Log.i("loadData", "postFragment");
-        //Creating an object for our api interface
-        ApiService api = RetroClient.getRetroClient();
+        if(visibility){
+            root.findViewById(R.id.container_progress_bar).setVisibility(View.VISIBLE);
+            getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        }
+        else
+        {
+            root.findViewById(R.id.container_progress_bar).setVisibility(View.GONE);
+            getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        }
 
-        //Calling Json
-        Call<JsonArray> jsonArrayCall = api.getPosts();
-
-        //Enqueue Callback will be call when get response...
-
-        Log.i("loadData", "before");
-
-        jsonArrayCall.enqueue(new Callback<JsonArray>() {
-            @Override
-            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
-                try
-                {
-                    Log.i("loadData", "onResponse");
-
-                    responseBody = response.body().toString();
-                    Log.i("responseBodyParser",responseBody);
-
-                    Type type = new TypeToken<ArrayList<Post>>(){}.getType();
-                    ArrayList<Post> arrayList = JSONParser.getFromJSONtoArrayList(responseBody, type);
-                    Log.i("arrayList", arrayList.toString());
-                    postRepository = new PostRepository(arrayList);
-
-                } catch (Exception e) {
-                    Log.e("onResponse", "There is an error");
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JsonArray> call, Throwable t) {
-                Log.i("onFailure", t.getMessage());
-            }});
+        Log.i("ProgressloaderAlbum", visibility ? "start" : "finish");
     }
 
+    @Override
+    public void showProgress() {
+        showProgressLoaderWithBackground(true, "load data");
+    }
+
+    @Override
+    public void hideProgress() {
+        showProgressLoaderWithBackground(false, "load data");
+    }
+
+    @Override
+    public void hideRefreshing() {
+        if(swipeRefreshLayout!=null)
+            swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void showNotFound() {
+        Toast.makeText(mContext, "Not Found", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showNotInternetConnection() {
+        Toast.makeText(mContext, "Not Internet connection", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setAdapter(RecyclerView.Adapter adapter) {
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void setEnabledSearch(boolean b) {
+        search_fab.setEnabled(b);
+    }
 }

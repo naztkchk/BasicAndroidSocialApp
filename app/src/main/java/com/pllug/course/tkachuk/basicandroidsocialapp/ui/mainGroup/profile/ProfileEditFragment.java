@@ -27,7 +27,7 @@ public class ProfileEditFragment extends Fragment {
     }
 
     private void initView() {
-        editDone_tv = (TextView) root.findViewById(R.id.profile_edit_done_iv);
+        editDone_tv = root.findViewById(R.id.profile_edit_done_iv);
     }
 
     private void initListeners() {

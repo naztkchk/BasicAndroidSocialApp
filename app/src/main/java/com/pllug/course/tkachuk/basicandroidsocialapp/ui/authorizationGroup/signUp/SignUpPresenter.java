@@ -3,7 +3,6 @@ package com.pllug.course.tkachuk.basicandroidsocialapp.ui.authorizationGroup.sig
 import android.app.Activity;
 import android.text.TextUtils;
 
-import com.pllug.course.tkachuk.basicandroidsocialapp.ui.authorizationGroup.AuthorizationActivity;
 import com.pllug.course.tkachuk.basicandroidsocialapp.ui.authorizationGroup.IAuthorizationView;
 
 public class SignUpPresenter implements ISignUpPresenter {
