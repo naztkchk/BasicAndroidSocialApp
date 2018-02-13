@@ -80,9 +80,11 @@ public class ImagePresenter  implements IImagePresenter{
             }
         });
         }else
+        {
             imageView.showNotInternetConnection();
             imageView.setEnabledSearch(false);
             imageView.hideRefreshing();
+        }
     }
 
     @Override

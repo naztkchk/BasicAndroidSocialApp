@@ -79,11 +79,12 @@ public class TodoPresenter implements ITodoPresenter{
                 todoView.hideProgress();
                 todoView.hideProgress();
             }});
-        }else
+        }else{
             todoView.showNotInternetConnection();
             todoView.setEnabledSearch(false);
             todoView.hideProgress();
             todoView.hideRefreshing();
+        }
     }
 
     @Override

@@ -79,11 +79,12 @@ public class AlbumPresenter  implements IAlbumPresenter{
                     albumView.hideProgress();
                 }
             });
-        }else
+        }else{
             albumView.showNotInternetConnection();
             albumView.setEnabledSearch(false);
             albumView.hideProgress();
             albumView.hideRefreshing();
+        }
     }
 
     @Override
